@@ -1,0 +1,13 @@
+### GET ping
+GET {{host}}/ping
+Accept: application/json;
+
+### GET json
+GET {{host}}
+Accept: application/json;
+
+###
+
+
+
+
