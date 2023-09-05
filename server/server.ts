@@ -4,17 +4,17 @@ import pingPlugin from "./pingPlugin.js";
 import cors from "@fastify/cors";
 
 const server: FastifyInstance = Fastify({ logger: true });
-
 server.register(cors, { origin: true, methods: "GET" });
 server.register(mainPlugin);
+
 server.register(pingPlugin);
 
 const start = async () => {
   try {
-    await server.listen({ port: 3000 });
+    const port: number = Number(process.env.PORT) || 3000;
+    const host: string = "RENDER" in process.env ? `0.0.0.0` : `localhost`;
 
-    const address = server.server.address();
-    const port = typeof address === "string" ? address : address?.port;
+    await server.listen({ host: host, port: port });
   } catch (err) {
     server.log.error(err);
     process.exit(1);
